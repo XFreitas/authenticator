@@ -6,6 +6,7 @@ from rich.panel import Panel
 from rich.progress import Progress, BarColumn
 from rich.console import Group
 from rich.text import Text
+from rich.table import Table
 
 load_dotenv()
 
@@ -48,7 +49,7 @@ def make_panel():
 
 def display_totp():
     """Atualiza o painel sem limpar o terminal."""
-    with Live(make_panel(), console=console, refresh_per_second=4) as live:
+    with Live(make_panel(), screen=True, refresh_per_second=4) as live:
         while True:
             time.sleep(0.25)
             live.update(make_panel())  # Atualiza o conteúdo do painel
@@ -56,6 +57,7 @@ def display_totp():
 
 def main():
     os.system("cls" if os.name == "nt" else "clear")
+    
     try:
         display_totp()
     except KeyboardInterrupt:
