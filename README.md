@@ -4,7 +4,7 @@ Este projeto é uma ferramenta de linha de comando (CLI) para gerar e exibir có
 
 A aplicação mostra o código atual e uma barra de progresso que indica o tempo restante até que o código seja atualizado.
 
-![Screenshot](https://i.imgur.com/example.png)  <!-- Você pode substituir por um screenshot real -->
+![Screenshot](https://github.com/XFreitas/authenticator/blob/main/assets/2025-10-07_09-10.png?raw=true)  <!-- Você pode substituir por um screenshot real -->
 
 ## Funcionalidades
 
@@ -17,7 +17,7 @@ A aplicação mostra o código atual e uma barra de progresso que indica o tempo
 
 1.  **Clone o repositório:**
     ```bash
-    git clone <URL_DO_SEU_REPOSITORIO>
+    git clone git@github.com:XFreitas/authenticator.git
     cd autenticador
     ```
 
