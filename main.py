@@ -1,4 +1,4 @@
-import time, pyotp, os
+import time, pyotp, os, pyperclip3
 from dotenv import load_dotenv
 from rich.console import Console
 from rich.live import Live
@@ -6,7 +6,6 @@ from rich.panel import Panel
 from rich.progress import Progress, BarColumn
 from rich.console import Group
 from rich.text import Text
-from rich.table import Table
 
 load_dotenv()
 
@@ -15,10 +14,16 @@ SECRET_HCPA = str(os.getenv("SECRET_HCPA"))
 console = Console()
 totp = pyotp.TOTP(SECRET_HCPA)
 
+current_code = None
+
 
 def make_panel():
     """Cria o painel com o código atual e a barra de progresso."""
-    current_code = totp.now()
+    global current_code
+    if current_code != totp.now():
+        current_code = totp.now()
+        pyperclip3.copy(current_code)
+
     time_remaining = totp.interval - int(time.time()) % totp.interval
 
     progress = Progress(
@@ -34,7 +39,7 @@ def make_panel():
     )
 
     text = Text.from_markup(
-        f"[bold green]Código TOTP:[/bold green] [bold yellow]{current_code}[/bold yellow]"
+        f"[bold green]Código TOTP:[/bold green] [bold yellow]{current_code}[/bold yellow]\n[bold italic green](Copiado para a Área de Transferência.)[/bold italic green]"
     )
 
     render_group = Group(text, progress)
@@ -57,7 +62,7 @@ def display_totp():
 
 def main():
     os.system("cls" if os.name == "nt" else "clear")
-    
+
     try:
         display_totp()
     except KeyboardInterrupt:
